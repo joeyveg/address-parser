@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import requests
+import io
 
 st.set_page_config(page_title="Address Parser", layout="centered")
 st.title("📍 Address Parser with Geocoding")
@@ -40,9 +41,13 @@ if uploaded_file and api_key:
 
         st.success("Finished parsing addresses!")
 
+        buffer = io.BytesIO()
+        parsed_df.to_excel(buffer, index=False, engine='openpyxl')
+        buffer.seek(0)
+
         st.download_button(
             label="Download Cleaned Excel",
-            data=parsed_df.to_excel(index=False, engine='openpyxl'),
+            data=buffer,
             file_name="parsed_addresses.xlsx",
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
