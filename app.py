@@ -7,7 +7,6 @@ st.set_page_config(page_title="Address Parser", layout="centered")
 st.title("📍 Address Parser with Geocoding")
 
 api_key = st.text_input("Enter your Google Maps Geocoding API Key", type="password")
-
 uploaded_file = st.file_uploader("Upload your Excel file", type=["xlsx"])
 
 if uploaded_file and api_key:
@@ -19,7 +18,7 @@ if uploaded_file and api_key:
         st.info("Parsing addresses... this may take a minute.")
 
         def geocode(address):
-            url = f"https://maps.googleapis.com/maps/api/geocode/json"
+            url = "https://maps.googleapis.com/maps/api/geocode/json"
             params = {"address": address, "key": api_key}
             response = requests.get(url, params=params)
             if response.status_code == 200:
