@@ -27,7 +27,7 @@ if uploaded_file and api_key:
                 if data['status'] == 'OK':
                     components = {comp['types'][0]: comp['long_name'] for comp in data['results'][0]['address_components']}
                     return pd.Series({
-                        'Street Address': components.get('route', '') + ' ' + components.get('street_number', ''),
+                        'Street Address': components.get('street_number', '') + ' ' + components.get('route', ''),
                         'City': components.get('locality', '') or components.get('postal_town', ''),
                         'State/Department': components.get('administrative_area_level_1', ''),
                         'Zip Code': components.get('postal_code', ''),
